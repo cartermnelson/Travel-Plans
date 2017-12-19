@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Register</title>
+	</head>
+	<body>
+		<h1>Welcome!</h1>
+		{% if messages %}
+			<ul style="color: red">
+			{% for message in messages %}
+			<li>{{ message }}</li>
+			{% endfor %}
+		</ul>
+		{% endif %}
+		<h2>Register</h2>
+		<form action='/register' method='POST'>
+			{% csrf_token %}
+			<label for="first_name">First Name:<input type="text" name="first_name"></label>
+			<label for="last_name">Last Name:<input type="text" name="last_name"></label>
+			<label for="email">Email Address:<input type="text" name="email"></label>
+			<label for="password">Password:<input type="password" name="password"></label>
+			<label for="cpassword">Confirm Password:<input type="password" name="cpassword"></label>
+			<input type="submit" value="Register">
+		</form>
+		<h2>Login</h2>
+		<form action='/login' method='POST'>
+			{% csrf_token %}
+			<label for="email">Email Address:<input type="text" name="email"></label>
+			<label for="password">Password:<input type="password" name="password"></label>
+			<input type="submit" value="Login">
+		</form>
+	</body>
+</html>
