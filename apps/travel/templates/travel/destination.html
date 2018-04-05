@@ -5,20 +5,42 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Destination</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
-	<a href="/travels">Home</a>
-	<a href="/logout">Logout</a>
-	<h1>{{ dest.dest }}</h1>
-	<p><b>Planned By:</b> {{ dest.planner.first_name }} {{ dest.planner.last_name }}</p>
-	<p><b>Description</b> {{ dest.desc }}</p>
-	<p><b>Travel Date From:</b> {{ dest.date_from }}</p>
-	<p><b>Travel Date To:</b> {{ dest.date_to }}</p>
-	{% if joined %}
-		<h1>Other users joining the trip:</h1>
-		{% for user in joined %}
-			<p>{{ user.first_name }} {{ user.last_name }}</p>
-		{% endfor %}
-	{% endif %}
+	<div class="container">
+		<ul class="nav justify-content-end">
+			<li class="nav-item">
+				<a class="nav-link active" href="/travels">Home</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link active" href="/logout">Logout</a>
+			</li>
+		</ul>
+
+		<h1>{{ dest.dest }}</h1>
+		<hr>
+		<div class="row">
+			<div class="col">
+				<p><strong>Planned By:</strong> {{ dest.planner.first_name }} {{ dest.planner.last_name }}</p>
+				<p><strong>Description</strong> {{ dest.desc }}</p>
+				<p><strong>Travel Date From:</strong> {{ dest.date_from }}</p>
+				<p><strong>Travel Date To:</strong> {{ dest.date_to }}</p>
+			</div>
+
+			{% if joined %}
+				<div class="col">
+					<h4>Other users joining the trip:</h4>
+					<table class="table">
+					{% for user in joined %}
+						<tr>
+							<td>{{ user.first_name }} {{ user.last_name }}</td>
+						</tr>
+					{% endfor %}
+					</table>
+				</div>
+			{% endif %}
+		</div>
+	</div>
 </body>
 </html>

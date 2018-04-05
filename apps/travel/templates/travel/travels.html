@@ -4,59 +4,76 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<title>Travel Dashboard</title>
 </head>
 <body>
-	<a href="/logout">Logout</a>
-	<h1>Hello, {{ user.first_name }}!</h1>
-	<h2>Your Trip Schedules</h2>
-	<table>
-		<tr>
-			<th>Destination</th>
-			<th>Travel Start Date</th>
-			<th>Travel End Date</th>
-			<th>Plan</th>
-		</tr>
-		{% for plan in plans %}
-			{% if plan.planner.id == request.session.user_id %}
-				<tr>
-					<td><a href="/travels/destination/{{ plan.id }}">{{ plan.dest }}</a></td>
-					<td>{{ plan.date_from }}</td>
-					<td>{{ plan.date_to }}</td>
-					<td>{{ plan.desc }}</td>
-				</tr>
-			{% endif %}
-		{% endfor %}
-		{% for plan in trips_joined %}
-			<tr>
-				<td><a href="/travels/destination/{{ plan.id }}">{{ plan.dest }}</a></td>
-				<td>{{ plan.date_from }}</td>
-				<td>{{ plan.date_to }}</td>
-				<td>{{ plan.desc }}</td>
-			</tr>
-		{% endfor %}
-	</table>
-	<h2>Other User's Travel Plans</h2>
-	<table>
-		<tr>
-			<th>Name</th>
-			<th>Destination</th>
-			<th>Travel Start Date</th>
-			<th>Travel End Date</th>
-			<th>Do You Want to Join?</th>
-		</tr>
-		{% for plan in plans %}
-			{% if plan.planner.id != request.session.user_id and plan not in trips_joined %}
-				<tr>
-					<td>{{ plan.planner.first_name }} {{ plan.planner.last_name }}</td>
-					<td><a href="/travels/destination/{{ plan.id }}">{{ plan.dest }}</a></td>
-					<td>{{ plan.date_from }}</td>
-					<td>{{ plan.date_to }}</td>
-					<td><a href="/travels/destination/{{ plan.id }}/join">Join</a></td>
-				</tr>
-			{% endif %}
-		{% endfor %}
-	</table>
-	<a href="/travels/add">Add Travel Plan</a>
+	<div class="container">
+		<ul class="nav justify-content-end">
+			<li class="nav-item">
+				<a class="nav-link active" href="/logout">Logout</a>
+			</li>
+		</ul>
+		<h1>Hello, {{ user.first_name }}!</h1>
+
+		<hr>
+
+		<div class="row">
+			<div class="col">
+				<h2>Your Trip Schedules</h2>
+				<table class="table table-striped">
+					<tr>
+						<th>Destination</th>
+						<th>Travel Start Date</th>
+						<th>Travel End Date</th>
+						<th>Plan</th>
+					</tr>
+					{% for plan in plans %}
+						{% if plan.planner.id == request.session.user_id %}
+							<tr>
+								<td><a href="/travels/destination/{{ plan.id }}">{{ plan.dest }}</a></td>
+								<td>{{ plan.date_from }}</td>
+								<td>{{ plan.date_to }}</td>
+								<td>{{ plan.desc }}</td>
+							</tr>
+						{% endif %}
+					{% endfor %}
+					{% for plan in trips_joined %}
+						<tr>
+							<td><a href="/travels/destination/{{ plan.id }}">{{ plan.dest }}</a></td>
+							<td>{{ plan.date_from }}</td>
+							<td>{{ plan.date_to }}</td>
+							<td>{{ plan.desc }}</td>
+						</tr>
+					{% endfor %}
+				</table>
+				<a class="btn btn-primary" href="/travels/add">Add Travel Plan</a>
+			</div>
+
+			<div class="col">
+				<h2>Other User's Travel Plans</h2>
+				<table class="table table-striped">
+					<tr>
+						<th>Name</th>
+						<th>Destination</th>
+						<th>Travel Start Date</th>
+						<th>Travel End Date</th>
+						<th>Do You Want to Join?</th>
+					</tr>
+					{% for plan in plans %}
+						{% if plan.planner.id != request.session.user_id and plan not in trips_joined %}
+							<tr>
+								<td>{{ plan.planner.first_name }} {{ plan.planner.last_name }}</td>
+								<td><a href="/travels/destination/{{ plan.id }}">{{ plan.dest }}</a></td>
+								<td>{{ plan.date_from }}</td>
+								<td>{{ plan.date_to }}</td>
+								<td><a href="/travels/destination/{{ plan.id }}/join">Join</a></td>
+							</tr>
+						{% endif %}
+					{% endfor %}
+				</table>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

@@ -1,3 +1,18 @@
-<h1>Successfully registered {{ user.first_name }} on {{ user.created_at }}</h1>
-<p>good job dummy</p>
-<a href="/main">Proceed</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Success</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+	<div class="container">
+		<div class="alert alert-success">
+			<h4 class="alert-heading">Successfully registered {{ user.first_name }} on {{ user.created_at }}</h1>
+			<a href="/main">Click here to proceed</a>
+		</div>
+	</div>
+</body>
+</html>
